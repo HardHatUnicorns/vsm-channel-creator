@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.aogiri.vsm</groupId>
-    <artifactId>channelcreator</artifactId>
+    <artifactId>channel-creator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
