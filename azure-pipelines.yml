@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
   
 variables:
-   serviceName: "channel-creator-service"
+   serviceName: "channel-creator"
    major: 0
    minor: 0
    ver: $[counter('', 0)]
