@@ -18,7 +18,7 @@ public class ChannelCreatorController {
 
     @PostMapping("/create")
     public ResponseEntity start(@RequestBody ChannelRequestDTO channelRequestDTO){
-        if (channelRequestDTO.getName() == null || channelRequestDTO.getUID() == null)
+        if (channelRequestDTO.getName() == null && channelRequestDTO.getUID() == null)
             return ResponseEntity.badRequest().body("Specify user by uid or name.");
         try {
             service.create(channelRequestDTO);
