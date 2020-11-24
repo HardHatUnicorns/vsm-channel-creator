@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+  
+variables:
+   serviceName: "channel-creator-service"
+   major: 0
+   minor: 0
+   ver: $[counter('', 0)]
+   name: $(major).$(minor).$(ver)
+name: $(major).$(minor).$(ver)
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker registry'
+    repository: 'vsm/$(serviceName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: $(name)
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'k8s vsm'
+    namespace: 'vsm'
+    command: 'set'
+    arguments: 'image deployments/$(serviceName) online=hardhu.azurecr.io/vsm/$(serviceName):$(name)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Azure dla studentów(7a8dcb4c-7baf-4bb5-9807-9a189e848aec)'
+    azureContainerRegistry: 'hardhu.azurecr.io'
