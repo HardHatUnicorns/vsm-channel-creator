@@ -28,9 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.walterjwhite.java.dependencies</groupId>
+            <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>0.0.17</version>
+            <version>1.18.16</version>
         </dependency>
     </dependencies>
 
