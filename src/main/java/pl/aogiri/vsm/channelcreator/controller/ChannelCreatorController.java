@@ -1,6 +1,7 @@
 package pl.aogiri.vsm.channelcreator.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class ChannelCreatorController {
     ChannelCreatorService service;
 
     @PostMapping("/create")
-    public ResponseEntity start(@RequestBody ChannelRequestDTO channelRequestDTO){
+    public ResponseEntity<Object> start(@RequestBody ChannelRequestDTO channelRequestDTO){
         if (channelRequestDTO.getName() == null && channelRequestDTO.getUID() == null)
             return ResponseEntity.badRequest().body("Specify user by uid or name.");
         try {
@@ -25,7 +26,7 @@ public class ChannelCreatorController {
         } catch (UserNotUniqueException e) {
             return ResponseEntity.badRequest().body("User is not unique.");
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
